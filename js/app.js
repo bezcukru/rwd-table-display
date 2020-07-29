@@ -11,6 +11,15 @@ const valuesContainer = document.querySelector('.app--values');
 
 const desktopViewport = window.matchMedia('screen and (min-width: 500px)');
 
+
+const drawValues = (isDesktop) => {
+    if(isDesktop) {
+        drawDesktopValues();
+    } else {
+        drawMobileValues();
+    }
+}
+
 const drawMobileValues = () => {
     valuesContainer.innerHTML = '';
 
@@ -62,6 +71,8 @@ const drawDesktopValues = () => {
     valuesContainer.appendChild(table)
 }
 
-//drawDesktopValues();
+drawValues(desktopViewport.matches); 
 
-drawMobileValues();
+desktopViewport.addListener(isDesktop => {
+    drawValues(isDesktop.matches);
+});
